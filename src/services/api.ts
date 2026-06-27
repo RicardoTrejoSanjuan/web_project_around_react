@@ -3,6 +3,9 @@ import type { Card } from "../types/Card.js";
 import type { User } from "../types/User.js";
 import { BASE_URL, HEADERS } from "../utils/constants.js";
 
+console.log("API URL:", import.meta.env.VITE_API_BASE_URL);
+console.log("TOKEN:", import.meta.env.VITE_API_TOKEN);
+
 /**
  * Handles communication with the REST API.
  */
