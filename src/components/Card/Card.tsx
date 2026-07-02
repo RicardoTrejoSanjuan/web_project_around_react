@@ -1,11 +1,11 @@
-import type { Card } from "../types/Card";
+import type { CardData } from "../../types/Card";
 import type { JSX } from "react/jsx-runtime";
 
 interface CardProps {
-  card: Card;
-  onCardClick: (card: Card) => void;
-  onCardLike: (card: Card) => void;
-  onCardDelete: (card: Card) => void;
+  card: CardData;
+  onCardClick: (card: CardData) => void;
+  onCardLike: (card: CardData) => void;
+  onCardDelete: (card: CardData) => void;
 }
 
 const CardItem = ({

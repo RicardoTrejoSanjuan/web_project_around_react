@@ -1,5 +1,4 @@
 import { useState, type JSX } from "react";
-import Popup from "./Popup";
 import { useFormValidation } from "../../hooks/useFormValidation";
 import type { PopupsState } from "../../types/Popups";
 import type { CardsState } from "../../types/Card";
@@ -50,44 +49,42 @@ const AddPlacePopup = ({ popups, cardsState }: Props): JSX.Element => {
   };
 
   return (
-    <Popup title="Nuevo lugar" onClose={handleClose}>
-      <form className="popup__form" id="new-card-form" onSubmit={handleSubmit}>
-        <input
-          className={`popup__input ${
-            errors.place ? "popup__input_type_error" : ""
-          }`}
-          value={place}
-          onChange={handleInputChange}
-          name="place"
-          placeholder="Título"
-          required
-          minLength={2}
-          maxLength={30}
-          type="text"
-        />
-        {errors.place && <span className="popup__error">{errors.place}</span>}
+    <form className="popup__form" id="new-card-form" onSubmit={handleSubmit}>
+      <input
+        className={`popup__input ${
+          errors.place ? "popup__input_type_error" : ""
+        }`}
+        value={place}
+        onChange={handleInputChange}
+        name="place"
+        placeholder="Título"
+        required
+        minLength={2}
+        maxLength={30}
+        type="text"
+      />
+      {errors.place && <span className="popup__error">{errors.place}</span>}
 
-        <input
-          className={`popup__input ${
-            errors.link ? "popup__input_type_error" : ""
-          }`}
-          value={link}
-          onChange={handleInputChange}
-          name="link"
-          placeholder="Enlace a la imagen"
-          required
-          type="url"
-        />
-        {errors.link && <span className="popup__error">{errors.link}</span>}
-        <button
-          className={`button popup__button ${!isValid && "popup__button_disabled"}`}
-          type="submit"
-          disabled={!isValid || loading}
-        >
-          {loading ? "Creando..." : "Crear"}
-        </button>
-      </form>
-    </Popup>
+      <input
+        className={`popup__input ${
+          errors.link ? "popup__input_type_error" : ""
+        }`}
+        value={link}
+        onChange={handleInputChange}
+        name="link"
+        placeholder="Enlace a la imagen"
+        required
+        type="url"
+      />
+      {errors.link && <span className="popup__error">{errors.link}</span>}
+      <button
+        className={`button popup__button ${!isValid && "popup__button_disabled"}`}
+        type="submit"
+        disabled={!isValid || loading}
+      >
+        {loading ? "Creando..." : "Crear"}
+      </button>
+    </form>
   );
 };
 

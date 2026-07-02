@@ -1,17 +1,17 @@
-export interface Card {
-  isLiked: boolean;
+export interface CardData {
   _id: string;
   name: string;
   link: string;
   owner: string;
   createdAt: string;
+  isLiked: boolean;
 }
 
 export interface CardsState {
-  cards: Card[];
+  cards: CardData[];
   loading: boolean;
-  addCard: (name: string, link: string) => Promise<Card>;
+  addCard: (name: string, link: string) => Promise<CardData>;
   deleteCard: (cardId: string) => Promise<void>;
-  toggleLike: (card: Card) => Promise<void>;
-  setCards: (cards: Card[]) => void;
+  toggleLike: (card: CardData) => Promise<void>;
+  setCards: (cards: CardData[]) => void;
 }

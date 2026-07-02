@@ -1,7 +1,7 @@
 import type { JSX } from "react/jsx-runtime";
-import type { User } from "../types/User";
-import type { PopupsState } from "../types/Popups";
-import type { UserState } from "../types/User";
+import type { UserData } from "../../types/User";
+import type { PopupsState } from "../../types/Popups";
+import type { UserState } from "../../types/User";
 
 interface ProfileProps {
   popups: PopupsState;
@@ -9,7 +9,7 @@ interface ProfileProps {
 }
 
 const Profile = ({ popups, user }: ProfileProps): JSX.Element | null => {
-  const currentUser: User | null = user.currentUser;
+  const currentUser: UserData | null = user.currentUser;
   const onEditProfile = popups.setEditProfileOpen;
   const onAddPlace = popups.setAddPlaceOpen;
   const onEditAvatar = popups.setAvatarOpen;

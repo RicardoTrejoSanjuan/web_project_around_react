@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import type { User, UserState } from "../types/User";
-import { api } from "../services/api";
+import type { UserData, UserState } from "../types/User";
+import { api } from "../utils/api/api";
 
 export function useUser(): UserState {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export function useUser(): UserState {
     fetchUser();
   }, []);
 
-  const updateUser = (name: string, about: string): Promise<User> => {
+  const updateUser = (name: string, about: string): Promise<UserData> => {
     setLoading(true);
     return api
       .updateProfile(name, about)
@@ -35,7 +35,7 @@ export function useUser(): UserState {
       });
   };
 
-  const updateAvatar = (avatar: string): Promise<User> => {
+  const updateAvatar = (avatar: string): Promise<UserData> => {
     setLoading(true);
     return api
       .updateAvatar(avatar)

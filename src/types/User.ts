@@ -1,4 +1,4 @@
-export interface User {
+export interface UserData {
   _id: string;
   name: string;
   about: string;
@@ -6,8 +6,12 @@ export interface User {
 }
 
 export interface UserState {
-  currentUser: User | null;
+  currentUser: UserData | null;
   loading: boolean;
-  updateUser: (name: string, about: string) => Promise<User>;
-  updateAvatar: (avatar: string) => Promise<User>;
+  updateUser: (name: string, about: string) => Promise<UserData>;
+  updateAvatar: (avatar: string) => Promise<UserData>;
+}
+
+export interface CurrentUserContextType {
+  currentUser: UserData | null;
 }

@@ -1,7 +1,6 @@
-import Header from "./components/Header";
-import CardList from "./components/CardList";
-import Profile from "./components/Profile";
-import Footer from "./components/Footer";
+import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
+import Footer from "./components/Footer/Footer";
 
 import EditProfilePopup from "./components/Popup/EditProfilePopup";
 import AddPlacePopup from "./components/Popup/AddPlacePopup";
@@ -14,55 +13,76 @@ import { useCards } from "./hooks/useCards";
 import { usePopups } from "./hooks/usePopups";
 
 import type { PopupsState } from "./types/Popups";
-import type { JSX } from "react/jsx-runtime";
+import { useContext, type JSX } from "react";
 import type { UserState } from "./types/User";
 import type { CardsState } from "./types/Card";
+import Popup from "./components/Popup/Popup";
+import CurrentUserContext from "./src/contexts/CurrentUserContext";
 
 function App(): JSX.Element {
   const popups: PopupsState = usePopups();
   const user: UserState = useUser();
   const cards: CardsState = useCards();
+  const { currentUser } = useContext(CurrentUserContext);
 
   return (
-    <div className="page__content">
-      <Header />
-
-      <main className="content">
-        {/* PROFILE SECTION */}
-        <Profile popups={popups} user={user} />
-
-        {/* CARDS SECTION */}
-        <section className="cards page__section">
-          <CardList popups={popups} cardsState={cards} />
-        </section>
-      </main>
-
-      <Footer />
+    <CurrentUserContext.Provider value={{ currentUser }}>
+      <div className="page__content">
+        <Header />
+        <Main popups={popups} user={user} cards={cards} />
+        <Footer />
+      </div>
 
       {/* IMAGE POPUP */}
-      <ImagePopup
-        card={popups.selectedCard}
-        onClose={() => popups.setSelectedCard(null)}
-      />
+      {popups.selectedCard && (
+        <ImagePopup
+          card={popups.selectedCard}
+          onClose={() => popups.setSelectedCard(null)}
+        />
+      )}
 
       {/* EDIT AVATAR */}
-      {popups.isAvatarOpen && <EditAvatarPopup popups={popups} user={user} />}
+      {popups.isAvatarOpen && (
+        <Popup
+          title="Editar foto de perfil"
+          className="popup__content_edit-avatar"
+          onClose={() => popups.setAvatarOpen(false)}
+        >
+          <EditAvatarPopup popups={popups} user={user} />
+        </Popup>
+      )}
 
       {/* EDIT PROFILE */}
       {popups.isEditProfileOpen && (
-        <EditProfilePopup popups={popups} user={user} />
+        <Popup
+          title="Editar perfil"
+          onClose={() => popups.setEditProfileOpen(false)}
+        >
+          <EditProfilePopup popups={popups} user={user} />
+        </Popup>
       )}
 
       {/* ADD PLACE */}
       {popups.isAddPlaceOpen && (
-        <AddPlacePopup popups={popups} cardsState={cards} />
+        <Popup
+          title="Nuevo lugar"
+          onClose={() => popups.setAddPlaceOpen(false)}
+        >
+          <AddPlacePopup popups={popups} cardsState={cards} />
+        </Popup>
       )}
 
       {/* DELETE CONFIRMATION */}
       {popups.cardToDelete && (
-        <DeleteConfirmationPopup popups={popups} cardsState={cards} />
+        <Popup
+          title="¿Está seguro/a?"
+          onClose={() => popups.setCardToDelete(null)}
+          className="popup__content_with_confirmation"
+        >
+          <DeleteConfirmationPopup popups={popups} cardsState={cards} />
+        </Popup>
       )}
-    </div>
+    </CurrentUserContext.Provider>
   );
 }
 

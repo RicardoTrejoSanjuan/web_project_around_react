@@ -1,7 +1,7 @@
 import CardItem from "./Card";
 import type { JSX } from "react/jsx-runtime";
-import type { PopupsState } from "../types/Popups";
-import type { CardsState } from "../types/Card";
+import type { PopupsState } from "../../types/Popups";
+import type { CardsState } from "../../types/Card";
 
 interface CardListProps {
   popups: PopupsState;

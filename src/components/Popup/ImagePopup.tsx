@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import type { JSX } from "react/jsx-runtime";
-import type { Card } from "../../types/Card";
+import type { CardData } from "../../types/Card";
 
 interface Props {
-  card: Card | null;
+  card: CardData | null;
   onClose: () => void;
 }
 
