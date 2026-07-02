@@ -1,6 +1,4 @@
-import type { JSX } from "react/jsx-runtime";
-
-const Footer = (): JSX.Element => {
+const Footer = (): React.JSX.Element => {
   const currentYear: number = new Date().getFullYear();
 
   return (
