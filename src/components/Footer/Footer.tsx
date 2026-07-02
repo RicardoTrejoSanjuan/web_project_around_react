@@ -1,4 +1,4 @@
-const Footer = (): React.JSX.Element => {
+function Footer(): React.JSX.Element {
   const currentYear: number = new Date().getFullYear();
 
   return (
@@ -6,6 +6,6 @@ const Footer = (): React.JSX.Element => {
       <p className="footer__copyright">©{currentYear} Around The U.S.</p>
     </footer>
   );
-};
+}
 
 export default Footer;
