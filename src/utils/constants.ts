@@ -1,4 +1,4 @@
-import type { HeadersInit } from "../types/Api";
+import type { HeadersInit } from "@/interfaces/Api";
 
 export const TOKEN = import.meta.env.VITE_API_TOKEN;
 export const BASE_URL = import.meta.env.VITE_API_BASE_URL;

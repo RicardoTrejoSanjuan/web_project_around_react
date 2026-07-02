@@ -1,15 +1,12 @@
 import type { JSX } from "react/jsx-runtime";
-import type { User } from "../types/User";
-import type { PopupsState } from "../types/Popups";
-import type { UserState } from "../types/User";
+import { useUser } from "@/hooks/useUser";
+import { usePopups } from "@/hooks/usePopups";
 
-interface ProfileProps {
-  popups: PopupsState;
-  user: UserState;
-}
+const Profile = (): JSX.Element | null => {
+  const user = useUser();
+  const popups = usePopups();
 
-const Profile = ({ popups, user }: ProfileProps): JSX.Element | null => {
-  const currentUser: User | null = user.currentUser;
+  const currentUser = user.currentUser;
   const onEditProfile = popups.setEditProfileOpen;
   const onAddPlace = popups.setAddPlaceOpen;
   const onEditAvatar = popups.setAvatarOpen;

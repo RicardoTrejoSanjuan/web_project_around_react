@@ -1,7 +1,7 @@
-import type { HeadersInit } from "../types/Api";
-import type { Card } from "../types/Card.js";
-import type { User } from "../types/User.js";
-import { BASE_URL, HEADERS } from "../utils/constants.js";
+import type { HeadersInit } from "@/interfaces/Api";
+import type { CardData } from "@/interfaces/CardData";
+import type { UserData } from "@/interfaces/UserData";
+import { BASE_URL, HEADERS } from "@/utils/constants";
 
 /**
  * Handles communication with the REST API.
@@ -55,8 +55,8 @@ export class Api {
    *
    * @returns Promise with user information.
    */
-  public getUserInfo(): Promise<User> {
-    return this.request<User>("/users/me");
+  public getUserInfo(): Promise<UserData> {
+    return this.request<UserData>("/users/me");
   }
 
   /**
@@ -64,8 +64,8 @@ export class Api {
    *
    * @returns Promise with an array of card data.
    */
-  public getInitialCards(): Promise<Card[]> {
-    return this.request<Card[]>("/cards");
+  public getInitialCards(): Promise<CardData[]> {
+    return this.request<CardData[]>("/cards");
   }
 
   /**
@@ -74,8 +74,8 @@ export class Api {
    * @param user - User data to update.
    * @returns Promise with updated user information.
    */
-  public updateProfile(name: string, about: string): Promise<User> {
-    return this.request<User>("/users/me", {
+  public updateProfile(name: string, about: string): Promise<UserData> {
+    return this.request<UserData>("/users/me", {
       method: "PATCH",
       body: JSON.stringify({
         name,
@@ -90,8 +90,8 @@ export class Api {
    * @param data - Card data.
    * @returns Promise with the created card.
    */
-  public createCard(name: string, link: string): Promise<Card> {
-    return this.request<Card>("/cards", {
+  public createCard(name: string, link: string): Promise<CardData> {
+    return this.request<CardData>("/cards", {
       method: "POST",
       body: JSON.stringify({
         name,
@@ -118,8 +118,8 @@ export class Api {
    * @param cardId - Card ID to like.
    * @returns Promise with the card data.
    */
-  private likeCard(cardId: string): Promise<Card> {
-    return this.request<Card>(`/cards/${cardId}/likes`, {
+  private likeCard(cardId: string): Promise<CardData> {
+    return this.request<CardData>(`/cards/${cardId}/likes`, {
       method: "PUT",
     });
   }
@@ -130,8 +130,8 @@ export class Api {
    * @param cardId - Card ID to unlike.
    * @returns Promise with the card data.
    */
-  private unlikeCard(cardId: string): Promise<Card> {
-    return this.request<Card>(`/cards/${cardId}/likes`, {
+  private unlikeCard(cardId: string): Promise<CardData> {
+    return this.request<CardData>(`/cards/${cardId}/likes`, {
       method: "DELETE",
     });
   }
@@ -142,7 +142,7 @@ export class Api {
    * @param cardId Card identifier.
    * @param isLiked Whether the current user already likes the card.
    */
-  public changeLikeStatus(cardId: string, isLiked: boolean): Promise<Card> {
+  public changeLikeStatus(cardId: string, isLiked: boolean): Promise<CardData> {
     return isLiked ? this.unlikeCard(cardId) : this.likeCard(cardId);
   }
 
@@ -152,8 +152,8 @@ export class Api {
    * @param avatar - User avatar data.
    * @returns Promise with updated user information.
    */
-  public updateAvatar(avatar: string): Promise<User> {
-    return this.request<User>("/users/me/avatar", {
+  public updateAvatar(avatar: string): Promise<UserData> {
+    return this.request<UserData>("/users/me/avatar", {
       method: "PATCH",
       body: JSON.stringify({
         avatar,

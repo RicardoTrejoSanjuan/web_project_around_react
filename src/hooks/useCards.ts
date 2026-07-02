@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { api } from "../services/api";
-import type { Card, CardsState } from "../types/Card";
+import { useEffect, useState, useContext } from "react";
+import type { CardData, CardsState } from "@/interfaces/CardData";
+import { api } from "@/utils/api";
+import CardsContext from "@/contexts/CardsContext";
 
-export function useCards(): CardsState {
-  const [cards, setCards] = useState<Card[]>([]);
+export function useCardsState(): CardsState {
+  const [cards, setCards] = useState<CardData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -47,10 +48,10 @@ export function useCards(): CardsState {
       });
   };
 
-  const toggleLike = (card: Card) => {
+  const toggleLike = (card: CardData) => {
     return api
       .changeLikeStatus(card._id, card.isLiked)
-      .then((newCard: Card) => {
+      .then((newCard: CardData) => {
         setCards((prev) => prev.map((c) => (c._id === card._id ? newCard : c)));
       });
   };
@@ -63,4 +64,8 @@ export function useCards(): CardsState {
     toggleLike,
     setCards,
   };
+}
+
+export function useCards(): CardsState {
+  return useContext(CardsContext);
 }

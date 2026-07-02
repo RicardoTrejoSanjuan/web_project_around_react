@@ -1,13 +1,13 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import type { JSX } from "react/jsx-runtime";
-import type { Card } from "../../types/Card";
+import { usePopups } from "@/hooks/usePopups";
 
-interface Props {
-  card: Card | null;
-  onClose: () => void;
-}
+const ImagePopup = (): JSX.Element => {
+  const popups = usePopups();
 
-const ImagePopup = ({ card, onClose }: Props): JSX.Element => {
+  const card = popups.selectedCard;
+  const onClose = useCallback(() => popups.setSelectedCard(null), [popups]);
+
   useEffect(() => {
     const handleEscClose = (event: KeyboardEvent): void => {
       if (event.key === "Escape") {
