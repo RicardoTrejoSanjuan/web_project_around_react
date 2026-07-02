@@ -1,14 +1,12 @@
-import CardItem from "./Card";
+import CardItem from "@/components/Main/components/Card/Card";
 import type { JSX } from "react/jsx-runtime";
-import type { PopupsState } from "../../types/Popups";
-import type { CardsState } from "../../types/Card";
+import { useCards } from "@/hooks/useCards";
+import { usePopups } from "@/hooks/usePopups";
 
-interface CardListProps {
-  popups: PopupsState;
-  cardsState: CardsState;
-}
+const CardList = (): JSX.Element => {
+  const cardsState = useCards();
+  const popups = usePopups();
 
-const CardList = ({ popups, cardsState }: CardListProps): JSX.Element => {
   const { cards, toggleLike } = cardsState;
   const { setSelectedCard, setCardToDelete } = popups;
 

@@ -1,14 +1,12 @@
 import { useState, type JSX } from "react";
-import { useFormValidation } from "../../hooks/useFormValidation";
-import type { PopupsState } from "../../types/Popups";
-import type { CardsState } from "../../types/Card";
+import { useFormValidation } from "@/hooks/useFormValidation";
+import { usePopups } from "@/hooks/usePopups";
+import { useCards } from "@/hooks/useCards";
 
-interface Props {
-  popups: PopupsState;
-  cardsState: CardsState;
-}
+const NewCardPopup = (): JSX.Element => {
+  const popups = usePopups();
+  const cardsState = useCards();
 
-const AddPlacePopup = ({ popups, cardsState }: Props): JSX.Element => {
   const setAddPlaceOpen = popups.setAddPlaceOpen;
   const { addCard, loading } = cardsState;
 
@@ -88,4 +86,4 @@ const AddPlacePopup = ({ popups, cardsState }: Props): JSX.Element => {
   );
 };
 
-export default AddPlacePopup;
+export default NewCardPopup;

@@ -10,16 +10,22 @@
 
 - **REST API Integration**: Load and save profile data, user avatar, and cards dynamically from a remote server using a unified `Api` service.
 - **Card Management**: Create new cards, like/unlike, and delete cards with server-side synchronization and immediate UI updates.
+- **Global State Management (Context API)**:
+  - `CurrentUserContext`: Holds global state for the logged-in user profile and provides update functions.
+  - `CardsContext`: Manages all card entries, liking/unliking, and deletion logic.
+  - `PopupsContext`: Manages modal visibility states and handling.
+- **Centralized Popup Management**:
+  - `PopupManager` & `popupConfig`: Dynamically renders active modal windows based on application state, separating page layout from modal rendering concerns.
 - **Interactive Modals (Popups)**:
   - Edit profile information through a form popup.
   - Change profile avatar image via a dedicated input form popup.
   - Delete cards securely with a confirmation popup dialog.
   - Open images in an enlarged popup view with captions.
   - Close modals via the close button, clicking the overlay, or pressing the `Escape` key.
-- **Custom React Hooks (Decoupled State & Logic)**:
-  - `usePopups`: Manages open/close states and keydown listener bindings.
-  - `useUser`: Handles profile data loading, initialization, and server-side updates.
-  - `useCards`: Handles card initialization, likes, and deletion flows.
+- **Custom React Hooks (Decoupled Consumable Logic)**:
+  - `usePopups`: Accesses and controls the popups context.
+  - `useUser`: Accesses and controls the user context.
+  - `useCards`: Accesses and controls the cards context.
   - `useFormValidation`: Handles input tracking, error reporting, and submit validation logic dynamically.
 - **Form Validation**: Real-time validation with custom native error messages, disabling submit buttons when inputs are invalid.
 
@@ -41,7 +47,7 @@
 │   ├── icons.svg
 │   └── Screenshot.png
 ├── src
-│   ├── assets
+│   ├── assets                     # Images and SVG assets
 │   ├── blocks                     # BEM modular styles
 │   │   ├── card.css
 │   │   ├── cards.css
@@ -52,39 +58,60 @@
 │   │   ├── popup.css
 │   │   └── profile.css
 │   ├── components                 # Functional React components
-│   │   ├── Popup
-│   │   │   ├── AddPlacePopup.tsx
-│   │   │   ├── DeleteConfirmationPopup.tsx
-│   │   │   ├── EditAvatarPopup.tsx
-│   │   │   ├── EditProfilePopup.tsx
-│   │   │   ├── ImagePopup.tsx
-│   │   │   └── Popup.tsx
-│   │   ├── Card.tsx
-│   │   ├── CardList.tsx
-│   │   ├── Footer.tsx
-│   │   ├── Header.tsx
-│   │   └── Profile.tsx
-│   ├── hooks                      # Custom state management hooks
+│   │   ├── Footer
+│   │   │   └── Footer.tsx
+│   │   ├── Header
+│   │   │   └── Header.tsx
+│   │   ├── Main                   # Main layout component
+│   │   │   ├── Main.tsx
+│   │   │   └── components
+│   │   │       ├── Card
+│   │   │       │   ├── Card.tsx
+│   │   │       │   └── CardList.tsx
+│   │   │       └── Popup          # Modal components
+│   │   │           ├── EditAvatar
+│   │   │           │   └── EditAvatarPopup.tsx
+│   │   │           ├── EditProfile
+│   │   │           │   └── EditProfilePopup.tsx
+│   │   │           ├── NewCard
+│   │   │           │   └── NewCardPopup.tsx
+│   │   │           ├── RemoveCard
+│   │   │           │   └── RemoveCardPopup.tsx
+│   │   │           ├── ImagePopup
+│   │   │           │   └── ImagePopup.tsx
+│   │   │           └── Popup.tsx
+│   │   ├── PopupManager           # Centralized modal router/renderer
+│   │   │   ├── PopupManager.tsx
+│   │   │   └── popupConfig.tsx
+│   │   └── Profile
+│   │       └── Profile.tsx
+│   ├── contexts                   # React Contexts and Providers
+│   │   ├── CardsContext.ts
+│   │   ├── CardsProvider.tsx
+│   │   ├── CurrentUserContext.ts
+│   │   ├── CurrentUserProvider.tsx
+│   │   ├── PopupsContext.ts
+│   │   └── PopupsProvider.tsx
+│   ├── hooks                      # Custom consumer hooks
 │   │   ├── useCards.ts
 │   │   ├── useFormValidation.ts
-│   │   ├── usePopups.tsx
+│   │   ├── usePopups.ts
 │   │   └── useUser.ts
-│   ├── services                   # API services
-│   │   ├── api.ts
-│   │   └── api-old.ts
-│   ├── types                      # Strict TypeScript types
+│   ├── interfaces                 # Strict TypeScript interfaces
 │   │   ├── Api.ts
-│   │   ├── Card.ts
-│   │   ├── Popups.ts
-│   │   └── User.ts
-│   ├── utils                      # Constants and environment helpers
+│   │   ├── CardData.ts
+│   │   ├── CurrentUserContextType.ts
+│   │   ├── ModalData.ts
+│   │   └── UserData.ts
+│   ├── utils                      # Utility functions & configuration constants
+│   │   ├── api.ts
 │   │   └── constants.ts
-│   ├── vendor                     # Extenal font/reset assets
+│   ├── vendor                     # External fonts and CSS resets
 │   │   ├── fonts.css
 │   │   └── normalize.css
-│   ├── App.tsx
-│   ├── index.css
-│   └── main.tsx
+│   ├── App.tsx                    # Context orchestration & main frame
+│   ├── index.css                  # Global CSS styles
+│   └── main.tsx                   # React application entry point
 ├── vite.config.ts
 ├── tsconfig.json
 ├── tsconfig.app.json
@@ -126,6 +153,14 @@ npm run build
 
 ## Recent Changes
 
+### Version 5.0.0 - 2026-07-02
+
+- **State Management Migration to React Context API**: Introduced global contexts (`CurrentUserContext`, `CardsContext`, `PopupsContext`) and their respective providers to decouple state sharing from prop-drilling, simplifying component interactions.
+- **PopupManager Orchestrator**: Added a central `PopupManager` and configuration (`popupConfig`) to handle modal open/close states and rendering dynamically.
+- **Component Restructuring**: Organized components hierarchically inside subfolders (e.g. `src/components/Main/components/Card` and `src/components/Main/components/Popup/...`) to improve structure and modularity.
+- **TypeScript Interface Standardization**: Renamed files and transitioned types to interfaces in `src/interfaces/` for standardized domain representations.
+- **API and Helpers Clean Up**: Refactored helper paths (e.g. moving `api.ts` to `src/utils/api.ts`) and streamlined imports/tsconfig configuration aliases.
+
 ### Version 4.0.0 - 2026-06-26
 
 - **React 19 & Vite Migration**: Ported the application from class-based OOP TypeScript to functional React components bundled with Vite.
@@ -165,15 +200,16 @@ npm run build
 
 ## Versions
 
-| Version | Date       | Description                                               |
-| ------- | ---------- | --------------------------------------------------------- |
-| 1.0.0   | 2026-04-28 | Initial version                                           |
-| 1.0.2   | 2026-04-28 | Added JavaScript and profile popup functionality          |
-| 1.0.3   | 2026-04-30 | Added initial cards, image popup, like and delete actions |
-| 1.0.4   | 2026-05-21 | Modularized JavaScript and added form validation          |
-| 2.0.0   | 2026-06-01 | Migrated project to TypeScript and OOP architecture       |
-| 3.0.0   | 2026-06-04 | Integrated REST API, avatar edits, confirmation popups    |
-| 4.0.0   | 2026-06-26 | Migrated project to React, Custom Hooks, and Vite         |
+| Version | Date       | Description                                                     |
+| ------- | ---------- | --------------------------------------------------------------- |
+| 1.0.0   | 2026-04-28 | Initial version                                                 |
+| 1.0.2   | 2026-04-28 | Added JavaScript and profile popup functionality                |
+| 1.0.3   | 2026-04-30 | Added initial cards, image popup, like and delete actions       |
+| 1.0.4   | 2026-05-21 | Modularized JavaScript and added form validation                |
+| 2.0.0   | 2026-06-01 | Migrated project to TypeScript and OOP architecture             |
+| 3.0.0   | 2026-06-04 | Integrated REST API, avatar edits, confirmation popups          |
+| 4.0.0   | 2026-06-26 | Migrated project to React, Custom Hooks, and Vite               |
+| 5.0.0   | 2026-07-02 | Migrated to React Context API, PopupManager, restructured files |
 
 ## Author
 

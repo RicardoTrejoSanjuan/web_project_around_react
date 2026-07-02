@@ -1,6 +1,6 @@
-import type { CardData } from "./Card";
+import type { CardData } from "./CardData";
 
-export interface PopupsState {
+export interface ModalData {
   selectedCard: CardData | null;
   setSelectedCard: (card: CardData | null) => void;
   isEditProfileOpen: boolean;

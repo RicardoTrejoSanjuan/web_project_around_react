@@ -11,7 +11,3 @@ export interface UserState {
   updateUser: (name: string, about: string) => Promise<UserData>;
   updateAvatar: (avatar: string) => Promise<UserData>;
 }
-
-export interface CurrentUserContextType {
-  currentUser: UserData | null;
-}

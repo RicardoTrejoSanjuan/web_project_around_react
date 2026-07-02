@@ -1,7 +1,7 @@
-import type { HeadersInit } from "../../types/Api";
-import type { CardData } from "../../types/Card";
-import type { UserData } from "../../types/User";
-import { BASE_URL, HEADERS } from "../constants";
+import type { HeadersInit } from "@/interfaces/Api";
+import type { CardData } from "@/interfaces/CardData";
+import type { UserData } from "@/interfaces/UserData";
+import { BASE_URL, HEADERS } from "@/utils/constants";
 
 /**
  * Handles communication with the REST API.

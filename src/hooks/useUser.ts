@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import type { UserData, UserState } from "../types/User";
-import { api } from "../utils/api/api";
+import { useEffect, useState, useContext } from "react";
+import type { UserData, UserState } from "@/interfaces/UserData";
+import { api } from "@/utils/api";
+import CurrentUserContext from "@/contexts/CurrentUserContext";
 
-export function useUser(): UserState {
+export function useUserState(): UserState {
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -54,4 +55,8 @@ export function useUser(): UserState {
     updateUser,
     updateAvatar,
   };
+}
+
+export function useUser(): UserState {
+  return useContext(CurrentUserContext);
 }

@@ -1,16 +1,11 @@
 import type { JSX } from "react/jsx-runtime";
-import type { CardsState } from "../../types/Card";
-import type { PopupsState } from "../../types/Popups";
+import { usePopups } from "@/hooks/usePopups";
+import { useCards } from "@/hooks/useCards";
 
-interface Props {
-  popups: PopupsState;
-  cardsState: CardsState;
-}
+const RemoveCardPopup = (): JSX.Element => {
+  const popups = usePopups();
+  const cardsState = useCards();
 
-const DeleteConfirmationPopup = ({
-  popups,
-  cardsState,
-}: Props): JSX.Element => {
   const { setCardToDelete, cardToDelete } = popups;
   const { deleteCard, loading } = cardsState;
 
@@ -34,4 +29,4 @@ const DeleteConfirmationPopup = ({
   );
 };
 
-export default DeleteConfirmationPopup;
+export default RemoveCardPopup;

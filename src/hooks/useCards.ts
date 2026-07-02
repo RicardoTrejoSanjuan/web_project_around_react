@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { api } from "../utils/api/api";
-import type { CardData, CardsState } from "../types/Card";
+import { useEffect, useState, useContext } from "react";
+import type { CardData, CardsState } from "@/interfaces/CardData";
+import { api } from "@/utils/api";
+import CardsContext from "@/contexts/CardsContext";
 
-export function useCards(): CardsState {
+export function useCardsState(): CardsState {
   const [cards, setCards] = useState<CardData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -63,4 +64,8 @@ export function useCards(): CardsState {
     toggleLike,
     setCards,
   };
+}
+
+export function useCards(): CardsState {
+  return useContext(CardsContext);
 }

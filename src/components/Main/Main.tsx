@@ -1,24 +1,15 @@
-import type { CardsState } from "../../types/Card";
-import type { PopupsState } from "../../types/Popups";
-import type { UserState } from "../../types/User";
-import CardList from "../Card/CardList";
-import Profile from "../Profile/Profile";
+import CardList from "@/components/Main/components/Card/CardList";
+import Profile from "@/components/Profile/Profile";
 
-interface MainProps {
-  popups: PopupsState;
-  user: UserState;
-  cards: CardsState;
-}
-
-const Main = ({ popups, user, cards }: MainProps) => {
+const Main = () => {
   return (
     <main className="content">
       {/* PROFILE SECTION */}
-      <Profile popups={popups} user={user} />
+      <Profile />
 
       {/* CARDS SECTION */}
       <section className="cards page__section">
-        <CardList popups={popups} cardsState={cards} />
+        <CardList />
       </section>
     </main>
   );

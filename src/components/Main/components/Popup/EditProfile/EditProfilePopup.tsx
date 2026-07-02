@@ -1,16 +1,13 @@
 import { useState } from "react";
-
-import { useFormValidation } from "../../hooks/useFormValidation";
+import { useFormValidation } from "@/hooks/useFormValidation";
 import type { JSX } from "react/jsx-runtime";
-import type { PopupsState } from "../../types/Popups";
-import type { UserState } from "../../types/User";
+import { usePopups } from "@/hooks/usePopups";
+import { useUser } from "@/hooks/useUser";
 
-interface Props {
-  popups: PopupsState;
-  user: UserState;
-}
+const EditProfilePopup = (): JSX.Element => {
+  const popups = usePopups();
+  const user = useUser();
 
-const EditProfilePopup = ({ popups, user }: Props): JSX.Element => {
   const { currentUser, loading, updateUser } = user;
   const { setEditProfileOpen } = popups;
 

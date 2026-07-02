@@ -1,4 +1,4 @@
-import type { CardData } from "../../types/Card";
+import type { CardData } from "@/interfaces/CardData";
 import type { JSX } from "react/jsx-runtime";
 
 interface CardProps {

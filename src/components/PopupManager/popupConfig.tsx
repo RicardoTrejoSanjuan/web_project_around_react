@@ -1,0 +1,45 @@
+import type { JSX } from "react";
+
+import EditAvatarPopup from "@popup/EditAvatar/EditAvatarPopup";
+import EditProfilePopup from "@popup/EditProfile/EditProfilePopup";
+import NewCardPopup from "@popup/NewCard/NewCardPopup";
+import RemoveCardPopup from "@popup/RemoveCard/RemoveCardPopup";
+
+import type { ModalData } from "@/interfaces/ModalData";
+
+export interface PopupConfig {
+  isOpen: boolean;
+  title: string;
+  className?: string;
+  onClose: () => void;
+  content: JSX.Element;
+}
+
+export const popupConfig = (popups: ModalData): PopupConfig[] => [
+  {
+    isOpen: popups.isAvatarOpen,
+    title: "Editar foto de perfil",
+    className: "popup__content_edit-avatar",
+    onClose: () => popups.setAvatarOpen(false),
+    content: <EditAvatarPopup />,
+  },
+  {
+    isOpen: popups.isEditProfileOpen,
+    title: "Editar perfil",
+    onClose: () => popups.setEditProfileOpen(false),
+    content: <EditProfilePopup />,
+  },
+  {
+    isOpen: popups.isAddPlaceOpen,
+    title: "Nuevo lugar",
+    onClose: () => popups.setAddPlaceOpen(false),
+    content: <NewCardPopup />,
+  },
+  {
+    isOpen: !!popups.cardToDelete,
+    title: "¿Está seguro/a?",
+    className: "popup__content_with_confirmation",
+    onClose: () => popups.setCardToDelete(null),
+    content: <RemoveCardPopup />,
+  },
+];
