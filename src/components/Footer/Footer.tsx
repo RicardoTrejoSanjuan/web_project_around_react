@@ -1,4 +1,4 @@
-function Footer(): React.JSX.Element {
+function Footer() {
   const currentYear: number = new Date().getFullYear();
 
   return (
