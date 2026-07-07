@@ -2,7 +2,7 @@ import type { JSX } from "react/jsx-runtime";
 import { usePopups } from "@/hooks/usePopups";
 import { useCards } from "@/hooks/useCards";
 
-const RemoveCardPopup = (): JSX.Element => {
+const RemoveCard = (): JSX.Element => {
   const popups = usePopups();
   const cardsState = useCards();
 
@@ -29,4 +29,4 @@ const RemoveCardPopup = (): JSX.Element => {
   );
 };
 
-export default RemoveCardPopup;
+export default RemoveCard;

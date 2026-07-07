@@ -3,7 +3,7 @@ import { useFormValidation } from "@/hooks/useFormValidation";
 import { usePopups } from "@/hooks/usePopups";
 import { useUser } from "@/hooks/useUser";
 
-const EditAvatarPopup = (): JSX.Element => {
+const EditAvatar = (): JSX.Element => {
   const popups = usePopups();
   const user = useUser();
 
@@ -62,4 +62,4 @@ const EditAvatarPopup = (): JSX.Element => {
   );
 };
 
-export default EditAvatarPopup;
+export default EditAvatar;

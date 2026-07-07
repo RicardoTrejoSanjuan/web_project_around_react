@@ -4,7 +4,7 @@ import { useFormValidation } from "@/hooks/useFormValidation";
 import { usePopups } from "@/hooks/usePopups";
 import { useUser } from "@/hooks/useUser";
 
-const EditProfilePopup = (): JSX.Element => {
+const EditProfile = (): JSX.Element => {
   const popups = usePopups();
   const user = useUser();
 
@@ -95,4 +95,4 @@ const EditProfilePopup = (): JSX.Element => {
   );
 };
 
-export default EditProfilePopup;
+export default EditProfile;

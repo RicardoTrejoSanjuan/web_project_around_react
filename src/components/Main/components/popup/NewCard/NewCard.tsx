@@ -3,7 +3,7 @@ import { useCards } from "@/hooks/useCards";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { usePopups } from "@/hooks/usePopups";
 
-const NewCardPopup: () => JSX.Element = () => {
+const NewCard: () => JSX.Element = () => {
   const popups = usePopups();
   const cardsState = useCards();
 
@@ -86,4 +86,4 @@ const NewCardPopup: () => JSX.Element = () => {
   );
 };
 
-export default NewCardPopup;
+export default NewCard;
