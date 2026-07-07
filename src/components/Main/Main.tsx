@@ -1,5 +1,5 @@
-import CardList from "@/components/Card/CardList";
 import Profile from "@/components/Profile/Profile";
+import CardList from "@/components/Main/components/Card/CardList";
 
 const Main = () => {
   return (

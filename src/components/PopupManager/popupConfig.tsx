@@ -1,9 +1,9 @@
 import type { JSX } from "react";
 
-import EditAvatarPopup from "@/components/EditAvatar/EditAvatarPopup";
-import EditProfilePopup from "@/components/EditProfile/EditProfilePopup";
-import NewCardPopup from "@/components/NewCard/NewCardPopup";
-import RemoveCardPopup from "@/components/RemoveCard/RemoveCardPopup";
+import EditAvatarPopup from "@/components/Main/components/EditAvatar/EditAvatarPopup";
+import EditProfilePopup from "@/components/Main/components/EditProfile/EditProfilePopup";
+import NewCardPopup from "@/components/Main/components/NewCard/NewCardPopup";
+import RemoveCardPopup from "@/components/Main/components/RemoveCard/RemoveCardPopup";
 
 import type { ModalData } from "@/interfaces/ModalData";
 

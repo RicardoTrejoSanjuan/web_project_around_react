@@ -1,5 +1,5 @@
 import type { JSX } from "react/jsx-runtime";
-import CardItem from "@/components/Card/Card";
+import CardItem from "@/components/Main/components/Card/Card";
 import { useCards } from "@/hooks/useCards";
 import { usePopups } from "@/hooks/usePopups";
 
