@@ -1,6 +1,6 @@
 import type { JSX } from "react/jsx-runtime";
 import Profile from "@/components/Profile/Profile";
-import CardList from "@/components/Card/CardList";
+import CardList from "@/components/Main/components/Card/CardList";
 
 const Main = (): JSX.Element => {
   return (
