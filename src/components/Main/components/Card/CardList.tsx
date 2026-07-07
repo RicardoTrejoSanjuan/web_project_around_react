@@ -1,5 +1,5 @@
 import type { JSX } from "react/jsx-runtime";
-import CardItem from "@/components/Main/components/Card/Card";
+import Card from "@/components/Main/components/Card/Card";
 import { useCards } from "@/hooks/useCards";
 import { usePopups } from "@/hooks/usePopups";
 
@@ -13,7 +13,7 @@ const CardList = (): JSX.Element => {
   return (
     <ul className="cards__list">
       {cards.map((card) => (
-        <CardItem
+        <Card
           key={card._id}
           card={card}
           onCardClick={setSelectedCard}

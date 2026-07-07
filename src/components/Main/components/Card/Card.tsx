@@ -8,7 +8,7 @@ interface CardProps {
   onCardDelete: (card: CardData) => void;
 }
 
-const CardItem = ({
+const Card = ({
   card,
   onCardClick,
   onCardLike,
@@ -49,4 +49,4 @@ const CardItem = ({
   );
 };
 
-export default CardItem;
+export default Card;
