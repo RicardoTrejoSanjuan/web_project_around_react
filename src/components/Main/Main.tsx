@@ -1,7 +1,8 @@
+import type { JSX } from "react/jsx-runtime";
 import Profile from "@/components/Profile/Profile";
-import CardList from "@/components/Main/components/Card/CardList";
+import CardList from "@/components/Card/CardList";
 
-const Main = () => {
+const Main = (): JSX.Element => {
   return (
     <main className="content">
       {/* PROFILE SECTION */}
