@@ -7,8 +7,9 @@ import Footer from "@/components/Footer/Footer";
 import PopupManager from "@/components/PopupManager/PopupManager";
 
 import { CardsProvider } from "@/contexts/CardsProvider";
-import { CurrentUserProvider } from "@/contexts/CurrentUserProvider";
 import { PopupsProvider } from "@/contexts/PopupsProvider";
+import CurrentUserContext from "@/contexts/CurrentUserContext";
+import { useUserState } from "@/hooks/useUser";
 
 const AppContent = (): JSX.Element => {
   return (
@@ -22,14 +23,16 @@ const AppContent = (): JSX.Element => {
 };
 
 const App = (): JSX.Element => {
+  const userState = useUserState();
+
   return (
-    <CurrentUserProvider>
+    <CurrentUserContext.Provider value={userState}>
       <CardsProvider>
         <PopupsProvider>
           <AppContent />
         </PopupsProvider>
       </CardsProvider>
-    </CurrentUserProvider>
+    </CurrentUserContext.Provider>
   );
 };
 
