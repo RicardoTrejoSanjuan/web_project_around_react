@@ -1,11 +1,10 @@
 import type { JSX } from "react";
 
-import EditAvatarPopup from "@/components/Main/components/EditAvatar/EditAvatarPopup";
-import EditProfilePopup from "@/components/Main/components/EditProfile/EditProfilePopup";
-import NewCardPopup from "@/components/Main/components/NewCard/NewCardPopup";
-import RemoveCardPopup from "@/components/Main/components/RemoveCard/RemoveCardPopup";
-
 import type { ModalData } from "@/interfaces/ModalData";
+import EditAvatarPopup from "../Main/components/popup/EditAvatar/EditAvatarPopup";
+import EditProfilePopup from "../Main/components/popup/EditProfile/EditProfilePopup";
+import NewCardPopup from "../Main/components/popup/NewCard/NewCardPopup";
+import RemoveCardPopup from "../Main/components/popup/RemoveCard/RemoveCardPopup";
 
 export interface PopupConfig {
   isOpen: boolean;
