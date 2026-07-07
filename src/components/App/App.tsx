@@ -1,10 +1,10 @@
+import type { JSX } from "react";
+
 import Header from "@/components/Header/Header";
 import Main from "@/components/Main/Main";
 import Footer from "@/components/Footer/Footer";
 
 import PopupManager from "@/components/PopupManager/PopupManager";
-
-import type { JSX } from "react";
 
 import { CardsProvider } from "@/contexts/CardsProvider";
 import { CurrentUserProvider } from "@/contexts/CurrentUserProvider";

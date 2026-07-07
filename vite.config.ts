@@ -12,9 +12,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
-      "@popup": fileURLToPath(
-        new URL("./src/components/Main/components/Popup", import.meta.url),
-      ),
     },
   },
 });

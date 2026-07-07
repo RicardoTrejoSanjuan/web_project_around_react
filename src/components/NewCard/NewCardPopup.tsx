@@ -1,9 +1,9 @@
 import { useState, type JSX } from "react";
+import { useCards } from "@/hooks/useCards";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { usePopups } from "@/hooks/usePopups";
-import { useCards } from "@/hooks/useCards";
 
-const NewCardPopup = (): JSX.Element => {
+const NewCardPopup: () => JSX.Element = () => {
   const popups = usePopups();
   const cardsState = useCards();
 

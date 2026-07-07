@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 import { usePopups } from "@/hooks/usePopups";
-import ImagePopup from "@popup/ImagePopup/ImagePopup";
-import Popup from "@popup/Popup";
+import ImagePopup from "@/components/ImagePopup/ImagePopup";
+import Popup from "@/components/Popup/Popup";
 import {
   popupConfig,
   type PopupConfig,
